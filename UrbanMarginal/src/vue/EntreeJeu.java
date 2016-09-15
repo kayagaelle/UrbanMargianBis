@@ -20,11 +20,16 @@ public class EntreeJeu extends JFrame {
 	private JPanel contentPane;
 	private Controle controle ;
 	
+	
 
 	
 	
 	private void btnStart_clic(){
-     evenementVue (this,"serveur");
+    this.evenementVue (this,"serveur");
+	}
+	private void evenementVue(EntreeJeu entreeJeu, String string) {
+		
+		
 	}
 	private void btnExit_clic(){
 		System.exit(0);
