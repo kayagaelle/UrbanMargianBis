@@ -23,9 +23,8 @@ public class EntreeJeu extends JFrame {
 
 	
 	
-	
 	private void btnStart_clic(){
-		System.out.println("using start button");
+     evenementVue (this,"serveur");
 	}
 	private void btnExit_clic(){
 		System.exit(0);
