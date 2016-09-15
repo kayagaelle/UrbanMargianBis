@@ -25,7 +25,7 @@ public class EntreeJeu extends JFrame {
 	
 	
 	private void btnStart_clic(){
-    this.evenementVue (this,"serveur");
+    evenementVue (this,"serveur");
 	}
 	private void evenementVue(EntreeJeu entreeJeu, String string) {
 		
