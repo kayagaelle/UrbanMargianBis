@@ -14,25 +14,29 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTextField;
 
 public class EntreeJeu extends JFrame {
 
 	private JPanel contentPane;
 	private Controle controle ;
 	
+	private JTextField txtIP;
+
+	
 	
 
 	
 	
 	private void btnStart_clic(){
-    evenementVue (this,"serveur");
+   controle.evenementVue (this,"serveur");
 	}
-	private void evenementVue(EntreeJeu entreeJeu, String string) {
-		
-		
-	}
+	
 	private void btnExit_clic(){
 		System.exit(0);
+	}
+	private void btnConnect_clic(){
+		controle.evenementVue(this,txtIP.getText());
 	}
 	/**
 	 * Create the frame.
@@ -59,6 +63,8 @@ public class EntreeJeu extends JFrame {
 		lblIpServer.setBounds(27, 122, 94, 14);
 		contentPane.add(lblIpServer);
 		
+	
+		
 		JTextArea textArea = new JTextArea();
 		textArea.setBounds(130, 117, 89, 22);
 		contentPane.add(textArea);
@@ -70,6 +76,7 @@ public class EntreeJeu extends JFrame {
 				btnStart_clic();
 			}
 		});
+		
 		btnStart.setBounds(229, 34, 89, 23);
 		contentPane.add(btnStart);
 		
@@ -79,7 +86,7 @@ public class EntreeJeu extends JFrame {
 		btnConnect.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				// btnConnect_clic;
+				btnConnect_clic();
 			}
 		});
 		btnConnect.setBounds(229, 118, 89, 23);
@@ -94,5 +101,11 @@ public class EntreeJeu extends JFrame {
 		});
 		btnExit.setBounds(229, 163, 89, 23);
 		contentPane.add(btnExit);
+		
+		txtIP = new JTextField();
+		txtIP.setText("127.0.0.1");
+		txtIP.setBounds(131, 119, 86, 20);
+		contentPane.add(txtIP);
+		txtIP.setColumns(10);
 	}
 }
