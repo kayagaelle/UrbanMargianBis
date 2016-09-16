@@ -24,7 +24,7 @@ public class Controle {
 	}
 	private void evenementEntreeJeu(Object info) {
 		
-		
+		System.out.print((String)info);
 	}
 	
 	
