@@ -16,6 +16,7 @@ public class Controle {
 		frmEntreeJeu.setVisible(true);
 		
 	}
+	
 	public void evenementVue (JFrame uneFrame ,Object info ) { // methode qui recoit en param uneframe de type Jframe et info de type objet 
 		if (uneFrame instanceof EntreeJeu){
 			evenementEntreeJeu(info);
