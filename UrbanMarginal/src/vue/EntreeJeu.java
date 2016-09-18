@@ -28,15 +28,17 @@ public class EntreeJeu extends JFrame {
 
 	
 	
-	private void btnStart_clic(){
-   controle.evenementVue (this,"serveur");
+	private void btnStart_clic(){ 
+		controle.evenementVue(this, "serveur");
+
 	}
 	
-	private void btnExit_clic(){
-		System.exit(0);
-	}
+	
 	private void btnConnect_clic(){
 		controle.evenementVue(this,txtIP.getText());
+	}
+	private void btnExit_clic(){
+		System.exit(0);
 	}
 	/**
 	 * Create the frame.
@@ -69,7 +71,7 @@ public class EntreeJeu extends JFrame {
 		textArea.setBounds(130, 117, 89, 22);
 		contentPane.add(textArea);
 		
-		JButton btnStart = new JButton("Start");
+		JButton btnStart = new JButton("Start"); // titre ecrit sur le bouton
 		btnStart.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -107,5 +109,6 @@ public class EntreeJeu extends JFrame {
 		txtIP.setBounds(131, 119, 86, 20);
 		contentPane.add(txtIP);
 		txtIP.setColumns(10);
+		this.controle=controle;
 	}
 }

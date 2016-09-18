@@ -18,9 +18,8 @@ public class Controle {
 	}
 	public void evenementVue (JFrame uneFrame ,Object info ) { // methode qui recoit en param uneframe de type Jframe et info de type objet 
 		if (uneFrame instanceof EntreeJeu){
-			evenementEntreeJeu (info);
+			evenementEntreeJeu(info);
 		}
-		
 	}
 	private void evenementEntreeJeu(Object info) {
 		
