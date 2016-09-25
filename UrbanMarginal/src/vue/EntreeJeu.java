@@ -27,7 +27,7 @@ public class EntreeJeu extends JFrame {
 	
 
 	
-	
+	// procedure evenmentielle bntStart
 	private void btnStart_clic(){ 
 		controle.evenementVue(this, "serveur");
 
