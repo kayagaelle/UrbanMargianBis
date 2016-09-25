@@ -51,7 +51,7 @@ public class Connection extends Thread {
 					} catch (ClassNotFoundException e) {
 						
 						e.printStackTrace();
-						System.out.println("La récupération n'est pas au formt objet : "+e);
+						System.out.println("La récupération n'est pas au format objet : "+e);
 						System.exit(0);
 					} catch (IOException e) {
 						e.printStackTrace();
