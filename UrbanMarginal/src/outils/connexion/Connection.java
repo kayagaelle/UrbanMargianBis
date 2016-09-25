@@ -6,6 +6,8 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
+
 public class Connection extends Thread {
 	
 	//Déclaration de propriétés 
@@ -14,6 +16,7 @@ public class Connection extends Thread {
 	private ObjectInputStream in ;
 	private ObjectOutputStream out ;
 	public boolean inOk = true;
+	public Object reception;
 	
 	
 	// Consttructeur de la classe Connection
@@ -41,7 +44,34 @@ public class Connection extends Thread {
 	
 		public void run (boolean inOk ){
 			
-		}
+			while (inOk == true){
+				
+					try {
+						reception = in.readObject() ;
+					} catch (ClassNotFoundException e) {
+						
+						e.printStackTrace();
+						System.out.println("La récupération n'est pas au formt objet : "+e);
+						System.exit(0);
+					} catch (IOException e) {
+						e.printStackTrace();
+						JOptionPane.showMessageDialog (null , "l'ordinateur distant s'est déconnecté");
+						inOk = false ;
+						try {
+							in.close();
+						} catch (IOException e1) {
+							
+							e1.printStackTrace();
+							System.out.println("canal fermé: "+e1);
+						}
+					}
+				} 
+			}
+
+			
+		
+
+		
 		
 		
 		
