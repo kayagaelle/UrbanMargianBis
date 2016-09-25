@@ -70,6 +70,20 @@ public class Connection extends Thread {
 					}
 				} 
 			}
+		
+			public void envoi  (Object unObject){
+				
+				try {
+					out.writeObject(unObject);
+					out.flush();
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+					System.out.println("Erreur sur l'objet out");
+				}
+			}
+
+			
 
 			
 		
