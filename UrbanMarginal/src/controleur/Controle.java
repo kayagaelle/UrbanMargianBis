@@ -1,5 +1,6 @@
 package controleur;
 import vue.Arene;
+import vue.ChoixJoueur;
 import vue.EntreeJeu;
 
 
@@ -8,6 +9,7 @@ import java.util.*;
 import javax.swing.JFrame;
 
 import modele.Jeu;
+import modele.JeuClient;
 import modele.JeuServeur;
 import outils.connexion.ClientSocket;
 import outils.connexion.ServeurSocket;
@@ -19,6 +21,9 @@ public class Controle {
 	private EntreeJeu  frmEntreeJeu ;
 	private Jeu leJeu ;
 	private Arene frmArene ;
+	private ChoixJoueur frmChoixJoueur ; 
+	
+	
 	public static void main(String[] args) {
 		new Controle ();
 		
@@ -47,9 +52,16 @@ public class Controle {
 			frmArene.setVisible(true);
 			
 			
+			
 		}else {
 			
 	     (new ClientSocket ((String)info , 6666 , this)).isConnexionOk(); // ((String) info) : on a caster info en string
+	        leJeu = new JeuClient(this) ; 
+	        frmArene = new Arene ();
+	        frmEntreeJeu.dispose();
+	        frmChoixJoueur = new ChoixJoueur ();
+			frmChoixJoueur.setVisible(true);
+	     
 		}
 		
 		
