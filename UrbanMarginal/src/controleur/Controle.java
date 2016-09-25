@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.swing.JFrame;
 
+import outils.connexion.ClientSocket;
 import outils.connexion.ServeurSocket;
 public class Controle {
 	private EntreeJeu  frmEntreeJeu ;
@@ -30,6 +31,9 @@ public class Controle {
 		if ((String)info == "serveur"){
 			
 			new ServeurSocket (this , 6666);
+		}else {
+			
+	     (new ClientSocket ((String)info , 6666 , this)).isConnexionOk(); // ((String) info) : on a caster info en string
 		}
 		
 		

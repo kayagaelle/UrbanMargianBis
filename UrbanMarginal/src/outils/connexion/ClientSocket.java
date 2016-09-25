@@ -28,7 +28,7 @@ public class ClientSocket {
 		} catch (IOException e) {
 		
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null ,  "Problème entrée/sortir (ex : IP incoorecte)");
+			JOptionPane.showMessageDialog(null ,  "Problème entrée/sortie (ex : IP incorrecte)");
 		}
 		
 		
@@ -44,7 +44,9 @@ public class ClientSocket {
 		return connexionOk;
 	}
 	
-	
+	public void setConnexionOk (boolean connexionOk){
+		this.connexionOk = connexionOk ;
+	}
 	
 	
 	

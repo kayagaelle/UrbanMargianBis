@@ -53,10 +53,13 @@ public class Connection extends Thread {
 						e.printStackTrace();
 						System.out.println("La récupération n'est pas au format objet : "+e);
 						System.exit(0);
+						
 					} catch (IOException e) {
+							
 						e.printStackTrace();
-						JOptionPane.showMessageDialog (null , "l'ordinateur distant s'est déconnecté");
+					JOptionPane.showMessageDialog (null , "l'ordinateur distant s'est déconnecté");
 						inOk = false ;
+						
 						try {
 							in.close();
 						} catch (IOException e1) {
