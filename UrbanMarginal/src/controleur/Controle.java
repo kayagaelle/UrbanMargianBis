@@ -16,7 +16,7 @@ import outils.connexion.ServeurSocket;
 
 
 
-public class Controle {
+public class Controle implements Global {
 	
 	private EntreeJeu  frmEntreeJeu ;
 	private Jeu leJeu ;
@@ -45,7 +45,7 @@ public class Controle {
 		System.out.print((String)info);
 		if ((String)info == "serveur"){
 			
-			new ServeurSocket (this , 6666);
+			new ServeurSocket (this , PORT);
 			leJeu = new JeuServeur (this);
 			frmEntreeJeu.dispose();
 			frmArene = new Arene ();
@@ -55,7 +55,7 @@ public class Controle {
 			
 		}else {
 			
-	     (new ClientSocket ((String)info , 6666 , this)).isConnexionOk(); // ((String) info) : on a caster info en string
+	     (new ClientSocket ((String)info , PORT , this)).isConnexionOk(); // ((String) info) : on a caster info en string
 	        leJeu = new JeuClient(this) ; 
 	        frmArene = new Arene ();
 	        frmEntreeJeu.dispose();

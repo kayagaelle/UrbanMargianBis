@@ -1,12 +1,16 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Cursor;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controleur.Global;
+
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -14,22 +18,64 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 
-public class ChoixJoueur extends JFrame {
-
+public class ChoixJoueur extends JFrame implements Global{
+    
+	//proprietes 
+	
 	private JPanel contentPane;
 	private JTextField txtPseudo;
+	private int numPerso ;
+	private JLabel lblPersonnage ;
+	
+	
+	// methodes 
+	
+	private void affichePerso(){
+		lblPersonnage.setIcon(new ImageIcon(PERSO+numPerso+MARCHE+'1'+'d'+DROITE+EXTIMAGE));
+		
+	}
+	
+	
+	
+	private void souris_normale(){
+		contentPane.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+		
+	}
+	private void souris_doigt(){
+		contentPane.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		
+	}
 	
 	private void lblPrecedent_clic(){ 
-		controle.evenementVue(this, "serveur");
+		
+		if ( numPerso <= NBPERSOS){
+			affichePerso();
+			numPerso++ ;
+		}
+		else {
+			numPerso = 1;
+		}
 
 	}
+	
 	private void lblSuivant_clic(){ 
-		controle.evenementVue(this, "serveur");
-
+		
+			if ( numPerso <= NBPERSOS){
+				
+				affichePerso();
+				numPerso++ ;
+			}
+			else {numPerso =1 ;}
+		/*for (numPerso=0 ; numPerso <= NBPERSOS ; numPerso++ ){
+			affichePerso();
+		}*/
+			
+			
+		
 	}
 	
 	private void lblGo_clic(){ 
-		controle.evenementVue(this, "serveur");
+		
 
 	}
 	/**
@@ -51,6 +97,14 @@ public class ChoixJoueur extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				lblPrecedent_clic();
 			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				souris_doigt();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				souris_normale();
+			}
 		});
 		
 		lblPrecedent.setBounds(57, 145, 52, 47);
@@ -62,6 +116,14 @@ public class ChoixJoueur extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblSuivant_clic();
 			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				souris_doigt();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				souris_normale();
+			}
 		});
 		lblSuivant.setBounds(289, 145, 46, 47);
 		contentPane.add(lblSuivant);
@@ -72,6 +134,14 @@ public class ChoixJoueur extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				lblGo_clic();
 			}
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				souris_doigt();
+			}
+			@Override
+			public void mouseExited(MouseEvent e) {
+				souris_normale();
+			}
 		});
 		lblGo.setBounds(316, 203, 52, 47);
 		contentPane.add(lblGo);
@@ -81,15 +151,19 @@ public class ChoixJoueur extends JFrame {
 		contentPane.add(txtPseudo);
 		txtPseudo.setColumns(10);
 		
-		JLabel lblPersonnage = new JLabel("");
+		lblPersonnage = new JLabel("");
 		lblPersonnage.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPersonnage.setBounds(144, 113, 117, 119);
 		contentPane.add(lblPersonnage);
 		
 		JLabel lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, 400, 275);
-		lblFond.setIcon(new ImageIcon("media/fonds/fondchoix.jpg"));
+		lblFond.setIcon(new ImageIcon(FONDCHOIX));
+			
 		contentPane.add(lblFond);
 		
+		txtPseudo.requestFocus();
+		numPerso = 1;
+		affichePerso();
 	}
 }
