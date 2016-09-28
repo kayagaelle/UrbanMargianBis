@@ -75,8 +75,16 @@ public class ChoixJoueur extends JFrame implements Global{
 	}
 	
 	private void lblGo_clic(){ 
+		txtPseudo.getText().equals("");
 		
-
+			
+			
+		
+		
+		
+		
+		
+		
 	}
 	/**
 	 * Create the frame.
