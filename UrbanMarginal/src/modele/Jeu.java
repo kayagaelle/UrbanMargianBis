@@ -7,6 +7,7 @@ public abstract class Jeu {
 
 	
 	protected Controle controle ; 
+	
 	abstract public  void setConnection (Connection connection ); // a verifier si c'est bien un void 
 	abstract public void reception (Connection connection , Object info);
 	abstract public void deconnection (Connection connection);

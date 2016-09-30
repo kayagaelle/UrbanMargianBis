@@ -9,9 +9,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controleur.Controle;
 import controleur.Global;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
@@ -26,7 +29,7 @@ public class ChoixJoueur extends JFrame implements Global{
 	private JTextField txtPseudo;
 	private int numPerso ;
 	private JLabel lblPersonnage ;
-	
+	private Controle controle ;
 	
 	// methodes 
 	
@@ -75,7 +78,14 @@ public class ChoixJoueur extends JFrame implements Global{
 	}
 	
 	private void lblGo_clic(){ 
-		txtPseudo.getText().equals("");
+		if (txtPseudo.getText().equals("")){
+			
+			JOptionPane.showMessageDialog(null, "Pseudo obligatoire");
+		} else {
+			
+			controle.evenementVue(this,PSEUDO+SEPARE+txtPseudo.getText()+SEPARE+numPerso);
+			
+		}
 		
 			
 			
@@ -89,7 +99,7 @@ public class ChoixJoueur extends JFrame implements Global{
 	/**
 	 * Create the frame.
 	 */
-	public ChoixJoueur() {
+	public ChoixJoueur(Controle controle) {
 		setTitle("Choice");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 416, 313);
@@ -173,5 +183,7 @@ public class ChoixJoueur extends JFrame implements Global{
 		txtPseudo.requestFocus();
 		numPerso = 1;
 		affichePerso();
+		this.controle =controle;
 	}
+		
 }

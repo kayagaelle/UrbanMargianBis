@@ -10,15 +10,15 @@ public class ClientSocket {
 
 	private boolean connexionOk ;
 	
-	public ClientSocket( String Ip , int port , Object leRecepteur  ){
+	public ClientSocket( String ip , int port , Object leRecepteur  ){
 		
 		
 		connexionOk = false ;
 		Socket socket ; 
 		try {
-			socket = new Socket (Ip , port );
+			socket = new Socket (ip , port );
 			System.out.println("La connexion au serveur a réussi");
-			connexionOk = true ;
+			this.connexionOk = true ;
 			new Connection (socket , leRecepteur);
 		} catch (UnknownHostException e) {
 			
