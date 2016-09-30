@@ -1,19 +1,22 @@
 package modele;
 
 import controleur.Controle;
+import controleur.Global;
 import outils.connexion.Connection;
 
-public class JeuServeur extends Jeu{
+public class JeuServeur extends Jeu implements Global{
 
 	@Override
 	public void setConnection(Connection connection) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
 	@Override
 	public void reception(Connection connection, Object info) {
-		// TODO Auto-generated method stub
+		
+		System.out.println(info);
 		
 	}
 
@@ -28,7 +31,7 @@ public class JeuServeur extends Jeu{
 	
 	
 	public JeuServeur (Controle controle){
-		super.controle = this.controle ;
+		super.controle = controle ;
 		
 	}
 

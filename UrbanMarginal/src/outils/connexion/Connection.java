@@ -16,7 +16,7 @@ public class Connection extends Thread {
 	private ObjectInputStream in ;
 	private ObjectOutputStream out ;
 	public boolean inOk = true;
-	public Object reception;
+
 	
 	
 	// Consttructeur de la classe Connection
@@ -39,15 +39,23 @@ public class Connection extends Thread {
 			System.exit(0);
 		}
 		super.start();
+		((controleur.Controle)this.leRecepteur).setConnection(this);
 		
 		}
 	
-		public void run (boolean inOk ){
-			
-			while (inOk == true){
+	
+		public void run (){
+			 Object reception;
+			boolean inOK=true ;
+			while (inOk){
 				
 					try {
+						
+						
 						reception = in.readObject() ;
+						((controleur.Controle)this.leRecepteur).receptionInfo(this ,reception);
+						
+						
 					} catch (ClassNotFoundException e) {
 						
 						e.printStackTrace();
@@ -65,21 +73,27 @@ public class Connection extends Thread {
 						} catch (IOException e1) {
 							
 							e1.printStackTrace();
-							System.out.println("canal fermé: "+e1);
+							System.out.println("canal fermé: "+e);
 						}
 					}
-				} 
+					
+				}
+			
 			}
 		
-			public void envoi  (Object unObject){
+		
+			
+			
+			public void envoi (Object unObject){
 				
 				try {
+					//System.out.println("connection"+unObject);
 					out.writeObject(unObject);
 					out.flush();
 				} catch (IOException e) {
 					
 					e.printStackTrace();
-					System.out.println("Erreur sur l'objet out");
+					System.out.println("Erreur sur l'objet out"+e);
 				}
 			}
 
