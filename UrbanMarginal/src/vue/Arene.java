@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.ImageIcon;
@@ -9,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controleur.Global;
+import modele.Mur;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -19,14 +21,16 @@ public class Arene extends JFrame implements Global {
 
 	private JPanel contentPane;
 	private JTextField txtSaisie;
-
+	private JPanel jpnMurs ;
 	
+
 
 	/**
 	 * Create the frame.
 	 */
 	public Arene() {
 		
+	
 		setTitle("Arena");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, L_ARENE+3*MARGE,H_ARENE + H_CHAT);
@@ -36,13 +40,13 @@ public class Arene extends JFrame implements Global {
 		contentPane.setLayout(null);
 		
 		JPanel jpnJeu = new JPanel();
-		jpnJeu.setBounds(459, 42, 87, 85);
+		jpnJeu.setBounds(0, 0, L_ARENE, H_ARENE);
 		contentPane.add(jpnJeu);
 		jpnJeu.setLayout(null);
 		jpnJeu.setOpaque(false);
 		
-		JPanel jpnMurs = new JPanel();
-		jpnMurs.setBounds(273, 181, 273, 73);
+		jpnMurs = new JPanel();
+		jpnMurs.setBounds(0, 0, L_ARENE, H_ARENE);
 		contentPane.add(jpnMurs);
 		jpnMurs.setLayout(null);
 		jpnMurs.setOpaque(false);
@@ -65,5 +69,19 @@ public class Arene extends JFrame implements Global {
 		
 		JTextArea txtChat = new JTextArea();
 		jspChat.setViewportView(txtChat);
+		
+		
+		
 	}
+	public void  ajoutMur (JLabel unMur){
+		
+		
+		
+		jpnMurs.add(unMur);
+		jpnMurs.repaint();
+		
+		
+	}
+		
+
 }

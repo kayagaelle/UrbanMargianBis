@@ -7,6 +7,7 @@ import vue.EntreeJeu;
 import java.util.*;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import modele.Jeu;
 import modele.JeuClient;
@@ -43,8 +44,9 @@ public class Controle implements Global {
 	}
 	
 	private void evenementJeuServeur(String ordre, Object info) {
-		if (ordre =="ajout mur"){
+		if (ordre =="ajout Mur"){
 			
+			frmArene.ajoutMur((JLabel)info);
 		}
 		
 	}
@@ -84,6 +86,8 @@ public class Controle implements Global {
 			leJeu = new JeuServeur (this);
 			frmEntreeJeu.dispose();
 			frmArene = new Arene ();
+			((modele.JeuServeur)this.leJeu).constructionMurs ();
+		
 			frmArene.setVisible(true);
 			
 

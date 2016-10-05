@@ -14,8 +14,8 @@ public class Mur extends Objet implements Global{
 	
 	// Constructeur
 	public Mur (){
-		posX =(int) Math.round( Math.random() *(H_ARENE-H_MUR));
-		posY = (int) Math.round( Math.random( )*(L_ARENE-L_MUR));
+		posX =(int) Math.round( Math.random() *(L_ARENE-L_MUR));
+		posY =(int) Math.round( Math.random()*(H_ARENE-H_MUR));
 		
 		super.label= new Label(-1, new JLabel());
 		

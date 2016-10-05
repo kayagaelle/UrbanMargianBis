@@ -36,13 +36,15 @@ public class JeuServeur extends Jeu implements Global{
 		int i ;
 		for (i=0 ; i <= NBMURS ; i++){
 			lesMurs.add(new Mur());
+			
+			controle.evenementModele(this , "ajout Mur" ,lesMurs.get(i).getLabel().getjLabel()); // on recup le mur i puis on passe par Label pour getjLabel
 		}
 	}
 	
 	
 	
 	
-
+	//Constructeur
 	public JeuServeur (Controle controle){
 		super.controle = controle ;
 		 Label.setNbLabel(0);
