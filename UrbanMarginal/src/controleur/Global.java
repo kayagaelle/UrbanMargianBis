@@ -33,7 +33,7 @@ public interface Global {
 	String MUR = CHEMINMURS+"mur.gif"; // image du mur
 	int H_MUR = 35;
 	int L_MUR = 34 ;
-	
+	int H_MESSAGE = 8;
 	
 	
 	

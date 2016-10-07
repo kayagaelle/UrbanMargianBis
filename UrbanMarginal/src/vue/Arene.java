@@ -1,6 +1,7 @@
 package vue;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Container;
 import java.awt.EventQueue;
 
@@ -22,6 +23,7 @@ public class Arene extends JFrame implements Global {
 	private JPanel contentPane;
 	private JTextField txtSaisie;
 	private JPanel jpnMurs ;
+	private JPanel jpnJeu ;
 	
 
 
@@ -39,7 +41,7 @@ public class Arene extends JFrame implements Global {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JPanel jpnJeu = new JPanel();
+		jpnJeu = new JPanel();
 		jpnJeu.setBounds(0, 0, L_ARENE, H_ARENE);
 		contentPane.add(jpnJeu);
 		jpnJeu.setLayout(null);
@@ -73,6 +75,13 @@ public class Arene extends JFrame implements Global {
 		
 		
 	}
+	/**
+	 * @return the jpnMurs
+	 */
+	public JPanel getJpnMurs() {
+		return jpnMurs;
+	}
+	
 	public void  ajoutMur (JLabel unMur){
 		
 		
@@ -82,6 +91,32 @@ public class Arene extends JFrame implements Global {
 		
 		
 	}
+	public void ajoutPanelMurs(JPanel unPanel){
 		
+		jpnMurs.add(unPanel);
+		jpnMurs.repaint();
+		contentPane.requestFocus();
+	}
 
+	public void ajoutJoueur (JLabel unJoueur){
+		
+		jpnJeu.add(unJoueur);
+		jpnJeu.repaint();
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

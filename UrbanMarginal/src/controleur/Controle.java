@@ -8,6 +8,7 @@ import java.util.*;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import modele.Jeu;
 import modele.JeuClient;
@@ -41,6 +42,18 @@ public class Controle implements Global {
 		if( unJeu instanceof JeuServeur ){
 			evenementJeuServeur(ordre , info);
 		}
+		if (unJeu instanceof JeuClient){
+			evenementJeuClient(ordre , info);
+		}
+	}
+	
+	private void evenementJeuClient (String ordre , Object info){
+			
+		if (ordre =="ajout panels Mur"){
+			
+			frmArene.ajoutPanelMurs((JPanel)info);
+		}
+		
 	}
 	
 	private void evenementJeuServeur(String ordre, Object info) {
@@ -48,6 +61,16 @@ public class Controle implements Global {
 			
 			frmArene.ajoutMur((JLabel)info);
 		}
+		if (ordre =="envoi panels Mur"){
+			
+			((modele.JeuServeur)this.leJeu).envoi((Connection)info ,  frmArene.getJpnMurs());
+			
+			}
+	if (ordre =="ajout joueur"){
+			
+			frmArene.ajoutJoueur((JLabel)info) ;
+			
+			}
 		
 	}
 	public void receptionInfo (Connection connection , Object info){
@@ -60,6 +83,7 @@ public class Controle implements Global {
 		if(leJeu instanceof JeuServeur){
 			leJeu.setConnection(connection);
 		}
+		
 	}
 	
 	public void evenementVue (JFrame uneFrame ,Object info ) { // methode qui recoit en param uneframe de type Jframe et info de type objet 
@@ -69,7 +93,9 @@ public class Controle implements Global {
 		if (uneFrame instanceof ChoixJoueur){
 			evenementChoixJoueur(info);
 		}
-		}
+	
+		
+	}
 	
 	private void evenementChoixJoueur(Object info){
 		//System.out.println("envoi..."+info);
