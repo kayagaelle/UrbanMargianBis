@@ -111,9 +111,57 @@ public class Joueur extends Objet implements Global {
 		
 	}
 	
-	
-	
-	
+	public int deplace (int action , int position , int orientation , int lepas , int max ,Hashtable <Connection , Joueur >lesJoueurs, ArrayList<Mur> lesMurs ) {
+		
+		this.orientation = orientation ;
+		int ancpos = position ;
+		position += lepas ;
+		if (position < 0){
+			position = 0 ; 
+		}
+		if (position > max){
+			position = max ;
+		}
+		if (action == GAUCHE || action == DROITE){
+			posX = position ;
+		}else {
+			posY = position ;
+		}
+		
+		if (toucheMur(lesMurs) || toucheJoueur(lesJoueurs)){
+			position = ancpos ;
+			
+		}
+		etape++;
+		if(etape == NBETATSMARCHE){
+			etape = 1;
+		}
+		return position;
+			
+	}
+	 public void  action (int action ,Hashtable <Connection , Joueur >lesJoueurs, ArrayList<Mur> lesMurs ){
+		 switch (action){
+		 case HAUT :
+			 posY = deplace (action, posY , orientation , -LEPAS , H_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			 break ; 
+		 case BAS  : 
+			 posY = deplace (action, posY , orientation , LEPAS , H_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			 break ;
+		 case GAUCHE :
+			 posX= deplace (action, posX ,GAUCHE , -LEPAS , L_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			 break ; 
+		 case DROITE  : 
+			 posX= deplace (action, posX , DROITE , LEPAS , L_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			 break ; 
+		 case TIR : 
+			 
+			 
+		 }
+		 affiche (MARCHE, etape);
+		 
+		 
+		 
+	 }
 	
 	
 	

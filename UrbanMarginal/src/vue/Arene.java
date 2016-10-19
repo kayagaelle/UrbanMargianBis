@@ -52,10 +52,23 @@ public class Arene extends JFrame implements Global {
 		setTitle("Arena");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, L_ARENE+3*MARGE,H_ARENE + H_CHAT);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+
+		if (typeJeu=="client"){
+		
+			contentPane.addKeyListener(new KeyAdapter() {
+				@Override
+				public void keyPressed(KeyEvent arg0) {
+				contentPane_keyPressed(arg0);
+				}
+
+			});
+		}
+		
 		
 		jpnJeu = new JPanel();
 		jpnJeu.setBounds(0, 0, L_ARENE, H_ARENE);
@@ -100,7 +113,33 @@ public class Arene extends JFrame implements Global {
 		jspChat.setViewportView(txtChat);
 	}
 	
-	
+	private void  contentPane_keyPressed(KeyEvent arg0) {
+		int valeur = -1;
+		switch (arg0.getKeyCode()){
+		
+		case KeyEvent.VK_UP  : 
+			 valeur = HAUT  ;
+			 break ; 
+			 
+		case KeyEvent.VK_DOWN : 
+			valeur = BAS ; 
+			break ;
+		case KeyEvent.VK_RIGHT : 
+			valeur = DROITE ;
+			break ; 
+		case KeyEvent.VK_LEFT:
+			valeur = GAUCHE ;
+			break;
+		case KeyEvent.VK_SPACE : 
+			valeur = TIR ; 
+			break; 
+			 	 
+		}
+		if (valeur != -1){
+			controle.evenementVue(this , ACTION+SEPARE+valeur);
+		}
+		
+	}
 	
 	private void txtSaisie_keyPressed(KeyEvent arg0) {
 				if(arg0.getKeyCode()== KeyEvent.VK_ENTER){
@@ -153,7 +192,7 @@ public class Arene extends JFrame implements Global {
 		}
 		jpnJeu.add(unLabel, num) ; 
 		jpnJeu.repaint();
-		System.out.println(jpnJeu);
+		//System.out.println(jpnJeu);
 	}
 	public void ajoutChat(String unePhrase){
 		

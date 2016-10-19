@@ -11,12 +11,16 @@ public interface Global {
 	
 	int GAUCHE = 0;     // direction
 	int DROITE = 1;     // direction 
+	int HAUT = 2; 
+	int BAS = 3; 
  	String CHEMINPERSOS = CHEMIN+"personnages"+SEPARATOR; 
 	String PERSO = CHEMINPERSOS +"perso";
 	String EXTIMAGE=".gif";
 	String MARCHE = "marche";
 	String BLESSE="blesse";
 	String MORT ="mort";
+	int TIR = 4 ; 
+	int ACTION = 2 ; 
 	int NBPERSOS = 3;     //nb perosnnages
 	int H_PERSO = 44;    // taille hauteur personnage
 	int L_PERSO = 39 ;   // "" largeur ""
@@ -35,7 +39,8 @@ public interface Global {
 	int L_MUR = 34 ;
 	int H_MESSAGE = 8;
 	int CHAT=1;
-	
+	int NBETATSMARCHE =4;
+	int LEPAS = 10 ; 
 	
 	
 	
