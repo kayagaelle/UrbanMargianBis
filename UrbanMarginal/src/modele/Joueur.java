@@ -25,6 +25,13 @@ public class Joueur extends Objet implements Global {
 	
 	
 	/**
+	 * @return the pseudo
+	 */
+	public String getPseudo() {
+		return pseudo;
+	}
+	
+	/**
 	 * @return the message
 	 */
 	public Label getMessage() {
@@ -42,8 +49,11 @@ public class Joueur extends Objet implements Global {
 	private void affiche(String etat , int etape){
 		label.getjLabel().setBounds(posX, posY, L_PERSO, H_PERSO);
 		label.getjLabel().setIcon(new ImageIcon(PERSO+numPerso+MARCHE+etape+'d'+DROITE+EXTIMAGE));
-		//message.getjLabel().setBounds ; 
+		message.getjLabel().setBounds(posX-10 , posY + H_PERSO , L_PERSO+20 , H_MESSAGE) ; 
 		message.getjLabel().setText(pseudo+" : "+vie);
+		this.jeuServeur.envoi(super.label);
+		this.jeuServeur.envoi(message);
+		
 		
 	}
 	
@@ -72,18 +82,19 @@ public class Joueur extends Objet implements Global {
 		// pour chaque objet 
 		for (Joueur unJoueur : lesJoueurs.values()){
 			if (!unJoueur.equals(this)){
-				super.toucheObjet(unJoueur);
+				if (super.toucheObjet(unJoueur)){
 				return true ;
 			}
-			
+		}	
 	}
 	return false ;
 	}
 	
 	private boolean toucheMur (ArrayList<Mur> lesMurs){
 		for (Mur unMur : lesMurs ){
-			super.toucheObjet(unMur);
+			if (super.toucheObjet(unMur)){
 			return true ;
+		    }
 		}
 	
 	return false ;

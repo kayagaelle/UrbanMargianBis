@@ -84,11 +84,13 @@ public class Connection extends Thread {
 		
 			
 			
-			public void envoi (Object unObject){
+			public  synchronized void envoi (Object unObject){
 				
 				try {
 					//System.out.println("connection"+unObject);
+					this.out.reset();
 					out.writeObject(unObject);
+					this.out.reset();
 					out.flush();
 				} catch (IOException e) {
 					

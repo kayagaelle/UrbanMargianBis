@@ -13,6 +13,8 @@ public class JeuServeur extends Jeu implements Global{
 	
 	private ArrayList<Mur> lesMurs = new ArrayList<Mur>() ;
 	private Hashtable <Connection , Joueur> lesJoueurs = new Hashtable <Connection, Joueur>() ;
+	private ArrayList  <Joueur> lesJoueursDansLordre  = new ArrayList <Joueur> ();
+	private String laPhrase ; 
 	
 	
 	public void nouveauLabelJeu (Label label){
@@ -27,6 +29,22 @@ public class JeuServeur extends Jeu implements Global{
 			
 	}
 
+	/* (non-Javadoc)
+	 * @see modele.Jeu#envoi(outils.connexion.Connection, java.lang.Object)
+	 */
+	
+	public void envoi(Object info) {
+		
+		
+		
+		for (Connection connection: lesJoueurs.keySet()){
+		super.envoi(connection ,info);
+		
+		}
+	}
+
+		
+
 	@Override
 	public void reception(Connection connection, Object info) {
 		//System.out.println(info);  pour verifier qu'on prend bien le pseudo
@@ -35,14 +53,20 @@ public class JeuServeur extends Jeu implements Global{
 			  
 		case PSEUDO : 
 			controle.evenementModele(this , "envoi panels Mur" , connection);
+			for (Joueur unJoueur : lesJoueursDansLordre) {
+				super.envoi(connection,unJoueur.getLabel() );
+				super.envoi(connection, unJoueur.getMessage());
+			}
 			lesJoueurs.get(connection).initPerso(infos[1],Integer.parseInt(infos[2]) , lesJoueurs , lesMurs);
-			
-			
+			this.lesJoueursDansLordre.add(this.lesJoueurs.get(connection));
+			laPhrase = "***"+lesJoueurs.get(connection).getPseudo()+"***" ;  
+			controle.evenementModele(this , "ajout phrase" , laPhrase);
 			break ;
 		
-		
-		
-		
+		case CHAT : 
+			 laPhrase = lesJoueurs.get(connection).getPseudo()+">"+infos[1] ;
+			controle.evenementModele(this , "ajout phrase" , laPhrase);
+			break ;
 		
 		}
 		

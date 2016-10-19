@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import modele.Jeu;
 import modele.JeuClient;
 import modele.JeuServeur;
+import modele.Label; 
 import outils.connexion.ClientSocket;
 import outils.connexion.Connection;
 import outils.connexion.ServeurSocket;
@@ -53,6 +54,17 @@ public class Controle implements Global {
 			
 			frmArene.ajoutPanelMurs((JPanel)info);
 		}
+		if (ordre =="ajout joueur"){
+			
+			frmArene.ajoutModifJoueur(((Label)info).getNumLabel(), ((Label)info).getjLabel()); 
+		}
+	if (ordre =="remplace chat"){
+			
+			frmArene.remplaceChat((String)info) ;
+		}
+		
+		
+		
 		
 	}
 	
@@ -66,13 +78,26 @@ public class Controle implements Global {
 			((modele.JeuServeur)this.leJeu).envoi((Connection)info ,  frmArene.getJpnMurs());
 			
 			}
-	if (ordre =="ajout joueur"){
+		if (ordre =="ajout joueur"){
+				
+				frmArene.ajoutJoueur((JLabel)info) ;
+				
+				}
+		if (ordre =="ajout phrase"){
 			
-			frmArene.ajoutJoueur((JLabel)info) ;
+			frmArene.ajoutChat((String)info) ;
 			
+			((modele.JeuServeur)this.leJeu).envoi( frmArene.getTxtChat());
 			}
+	
+	
+	
 		
 	}
+	
+	
+	
+	
 	public void receptionInfo (Connection connection , Object info){
 		
 		this.leJeu.reception(connection ,info);
@@ -86,15 +111,22 @@ public class Controle implements Global {
 		
 	}
 	
-	public void evenementVue (JFrame uneFrame ,Object info ) { // methode qui recoit en param uneframe de type Jframe et info de type objet 
+	public void evenementVue (JFrame uneFrame ,Object info ) { 
 		if (uneFrame instanceof EntreeJeu){
 			evenementEntreeJeu(info);
 		}
 		if (uneFrame instanceof ChoixJoueur){
 			evenementChoixJoueur(info);
 		}
+		if (uneFrame instanceof Arene){
+			evenementArene(info);
+			
+		}
 	
-		
+	}
+	
+	private void  evenementArene(Object info){
+		((modele.JeuClient)this.leJeu).envoi(info);
 	}
 	
 	private void evenementChoixJoueur(Object info){
@@ -111,7 +143,7 @@ public class Controle implements Global {
 			new ServeurSocket (this , PORT);
 			leJeu = new JeuServeur (this);
 			frmEntreeJeu.dispose();
-			frmArene = new Arene ();
+			frmArene = new Arene ("serveur",this);
 			((modele.JeuServeur)this.leJeu).constructionMurs ();
 		
 			frmArene.setVisible(true);
@@ -123,7 +155,7 @@ public class Controle implements Global {
 	     (new ClientSocket ((String)info , PORT , this)).isConnexionOk(); // ((String) info) : on a caster info en string
 	        leJeu = new JeuClient(this) ; 
 	        leJeu.setConnection(connection);
-	        frmArene = new Arene ();
+	        frmArene = new Arene ("client",this);
 	        frmEntreeJeu.dispose();
 	        frmChoixJoueur = new ChoixJoueur(this);
 			frmChoixJoueur.setVisible(true);

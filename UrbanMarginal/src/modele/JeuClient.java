@@ -19,8 +19,15 @@ public class JeuClient extends Jeu{
 		if (info instanceof JPanel){
 			controle.evenementModele(this, "ajout panels Mur", info);
 		}
+		if (info instanceof Label){
+			controle.evenementModele(this, "ajout joueur", info);
+		}
+		if (info instanceof String){
+			controle.evenementModele(this, "remplace chat", info);
+		}
 		
 	}
+	
 
 	@Override
 	public void deconnection(Connection connection) {

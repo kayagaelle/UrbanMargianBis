@@ -26,7 +26,7 @@ public abstract class Objet {
 		return label;
 	}
 	
-	// pour voir si deux objet je touche ou pas 
+	// pour voir si deux objet se touche ou pas 
 	public boolean toucheObjet (Objet objet){
 		if (objet.label==null){
 			return false ;
