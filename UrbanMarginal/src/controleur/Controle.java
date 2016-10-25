@@ -2,7 +2,7 @@ package controleur;
 import vue.Arene;
 import vue.ChoixJoueur;
 import vue.EntreeJeu;
-
+ 
 
 import java.util.*;
 
@@ -62,7 +62,10 @@ public class Controle implements Global {
 			
 			frmArene.remplaceChat((String)info) ;
 		}
+	if (ordre =="son"){
 		
+		frmArene.JoueSon((Integer)info) ;
+	}	
 		
 		
 		
@@ -108,6 +111,10 @@ public class Controle implements Global {
 		if(leJeu instanceof JeuServeur){
 			leJeu.setConnection(connection);
 		}
+		
+	}
+	public void deconnection (Connection connection){
+		leJeu.deconnection(connection);
 		
 	}
 	

@@ -21,9 +21,16 @@ public class Joueur extends Objet implements Global {
 	private JeuServeur jeuServeur ;
 	private int vie ;
 	private int orientation ;  // tournea droite = 1 et gauche= 0
+
 	private int etape ;  // num de l'étape dans l'animation 
+	private Boule boule ;
+	private static final int MAXVIE = 10;
+	private static final int GAIN = 1;
+	private static final int PERTE = 2;
 	
-	
+		public int getOrientation() {
+		return orientation;
+	}
 	/**
 	 * @return the pseudo
 	 */
@@ -37,23 +44,28 @@ public class Joueur extends Objet implements Global {
 	public Label getMessage() {
 		return message;
 	}
+	
+
+	public Boule getBoule() {
+	return boule;
+}
 
 	//constructeur
 	public Joueur(JeuServeur jeuServeur) {
 		this.jeuServeur = jeuServeur;
-		vie = 10 ;
+		vie = MAXVIE;
 		etape = 1;
 		orientation = DROITE ; 
 	}
 	
-	private void affiche(String etat , int etape){
+	public void affiche(String etat , int etape){
 		label.getjLabel().setBounds(posX, posY, L_PERSO, H_PERSO);
-		label.getjLabel().setIcon(new ImageIcon(PERSO+numPerso+MARCHE+etape+'d'+DROITE+EXTIMAGE));
+		label.getjLabel().setIcon(new ImageIcon(PERSO+numPerso+etat+etape+'d'+orientation+EXTIMAGE));
 		message.getjLabel().setBounds(posX-10 , posY + H_PERSO , L_PERSO+20 , H_MESSAGE) ; 
 		message.getjLabel().setText(pseudo+" : "+vie);
 		this.jeuServeur.envoi(super.label);
 		this.jeuServeur.envoi(message);
-		
+		 
 		
 	}
 	
@@ -73,8 +85,8 @@ public class Joueur extends Objet implements Global {
 		jeuServeur.nouveauLabelJeu(message);
 		premierePosition (lesJoueurs, lesMurs) ;
 		affiche (MARCHE , etape);
-		
-		
+		boule = new Boule(jeuServeur);
+		jeuServeur.envoi(boule.getLabel());
 		
 	}
 
@@ -132,10 +144,12 @@ public class Joueur extends Objet implements Global {
 			position = ancpos ;
 			
 		}
-		etape++;
-		if(etape == NBETATSMARCHE){
+		
+		etape = etape +1 ;
+		if(etape > NBETATSMARCHE){
 			etape = 1;
 		}
+		
 		return position;
 			
 	}
@@ -154,16 +168,43 @@ public class Joueur extends Objet implements Global {
 			 posX= deplace (action, posX , DROITE , LEPAS , L_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
 			 break ; 
 		 case TIR : 
-			 
-			 
+			 		jeuServeur.envoi(FIGHT);
+					boule.tireBoule(this, lesMurs, lesJoueurs);
+			
 		 }
 		 affiche (MARCHE, etape);
 		 
 		 
 		 
 	 }
-	
-	
+	 public void gainVie(){
+			vie += GAIN;
+		}
+		
+		public void perteVie(){
+			vie -= PERTE;
+			if(vie < 0){
+				vie = 0;
+			}
+		}
+		
+		public boolean estMort(){
+			if(vie == 0){
+				return true;
+			}
+			return false;
+		}
+		
+		public void departJoueur(){
+			if(this.label != null){
+			this.message.getjLabel().setVisible(false);
+			super.label.getjLabel().setVisible(false);
+			this.boule.getLabel().getjLabel().setVisible(false);
+			jeuServeur.envoi(message);
+			jeuServeur.envoi(label);
+			jeuServeur.envoi(boule.getLabel());
+			}
+		}
 	
 	
 }

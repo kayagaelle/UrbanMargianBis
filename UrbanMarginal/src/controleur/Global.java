@@ -17,7 +17,7 @@ public interface Global {
 	String PERSO = CHEMINPERSOS +"perso";
 	String EXTIMAGE=".gif";
 	String MARCHE = "marche";
-	String BLESSE="blesse";
+	String BLESSE="touche";
 	String MORT ="mort";
 	int TIR = 4 ; 
 	int ACTION = 2 ; 
@@ -41,8 +41,24 @@ public interface Global {
 	int CHAT=1;
 	int NBETATSMARCHE =4;
 	int LEPAS = 10 ; 
-	
-	
+	int L_BOULE = 17;
+	int H_BOULE = 17 ;
+	String CHEMINBOULES =CHEMIN + "boules" +SEPARATOR;
+	String BOULE = CHEMINBOULES + "boule.gif";
+	int NBETATSBLESSE =2;
+	int NBETATSMORT = 2;
+	int FIGHT = 0;
+	int HURT = 1;
+    int DEATH = 2;
+    String CHEMINSONS = CHEMIN + "sons/";
+   String  SONPRECEDENT = CHEMINSONS + "precedent.wav"; // sur le clic du bouton précédent
+    String SONSUIVANT = CHEMINSONS + "suivant.wav"; // sur le clic du bouton suivant
+   String  SONGO = CHEMINSONS + "go.wav" ;// sur le clic du bouton go
+   String  SONWELCOME = CHEMINSONS + "welcome.wav"; // à l'entrée de la frame ChoixJoueur
+    String SONAMBIANCE = CHEMINSONS + "mabeaute.wav" ;// son d'ambiance dans tout
+    public static final String[]
+    		SON = {"fight.wav", "hurt.wav", "death.wav"} ;
+
 	
 	
 	

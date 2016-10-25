@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
-
+import controleur.Controle;
 import javax.swing.JOptionPane;
 
 public class Connection extends Thread {
@@ -65,8 +65,9 @@ public class Connection extends Thread {
 					} catch (IOException e) {
 							
 						e.printStackTrace();
-					JOptionPane.showMessageDialog (null , "l'ordinateur distant s'est déconnecté");
+					JOptionPane.showMessageDialog (null , "Un joueur s'est déconnecté");
 						inOk = false ;
+						((controleur.Controle)this.leRecepteur).deconnection(this );
 						
 						try {
 							in.close();
@@ -84,7 +85,7 @@ public class Connection extends Thread {
 		
 			
 			
-			public  synchronized void envoi (Object unObject){
+			public synchronized void envoi (Object unObject){
 				
 				try {
 					//System.out.println("connection"+unObject);
@@ -97,26 +98,7 @@ public class Connection extends Thread {
 					e.printStackTrace();
 					System.out.println("Erreur sur l'objet out"+e);
 				}
-			}
-
-			
-
-			
-		
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-	
-
-
-
+			}	
 	
 	}
 	

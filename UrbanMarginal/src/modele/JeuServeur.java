@@ -3,6 +3,7 @@ package modele;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import java.io.Serializable;
 import controleur.Controle;
 import controleur.Global;
 import outils.connexion.Connection;
@@ -56,11 +57,13 @@ public class JeuServeur extends Jeu implements Global{
 			for (Joueur unJoueur : lesJoueursDansLordre) {
 				super.envoi(connection,unJoueur.getLabel() );
 				super.envoi(connection, unJoueur.getMessage());
+				super.envoi(connection , unJoueur.getBoule().getLabel());
 			}
 			lesJoueurs.get(connection).initPerso(infos[1],Integer.parseInt(infos[2]) , lesJoueurs , lesMurs);
 			this.lesJoueursDansLordre.add(this.lesJoueurs.get(connection));
 			laPhrase = "***"+lesJoueurs.get(connection).getPseudo()+"***" ;  
 			controle.evenementModele(this , "ajout phrase" , laPhrase);
+			
 			break ;
 		
 		case CHAT : 
@@ -68,7 +71,9 @@ public class JeuServeur extends Jeu implements Global{
 			controle.evenementModele(this , "ajout phrase" , laPhrase);
 			break ;
 		case ACTION : 
-			lesJoueurs.get(connection).action(Integer.parseInt(infos[1]),lesJoueurs , lesMurs);
+			if(!lesJoueurs.get(connection).estMort()){
+				lesJoueurs.get(connection).action(Integer.parseInt(infos[1]), lesJoueurs, lesMurs);
+				}
 			break ; 
 		}
 		
@@ -77,9 +82,11 @@ public class JeuServeur extends Jeu implements Global{
 
 	@Override
 	public void deconnection(Connection connection) {
-		// TODO Auto-generated method stub
+		lesJoueurs.get(connection).departJoueur();
+		lesJoueurs.remove(connection);
 		
 	}
+	
 	
 	public void constructionMurs (){
 		int i ;
@@ -91,9 +98,7 @@ public class JeuServeur extends Jeu implements Global{
 	}
 	
 	
-	
-	
-	//Constructeur
+		//Constructeur
 	public JeuServeur (Controle controle){
 		super.controle = controle ;
 		 Label.setNbLabel(0);

@@ -11,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import controleur.Controle;
 import controleur.Global;
+import outils.son.Son;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,7 +31,10 @@ public class ChoixJoueur extends JFrame implements Global{
 	private int numPerso ;
 	private JLabel lblPersonnage ;
 	private Controle controle ;
-	
+	private Son precedent ;
+	private Son suivant ;
+	private Son go ;
+	private Son welcome ;
 	// methodes 
 	
 	private void affichePerso(){
@@ -49,40 +53,37 @@ public class ChoixJoueur extends JFrame implements Global{
 		
 	}
 	
-	private void lblPrecedent_clic(){ 
-		
-		if ( numPerso <= NBPERSOS){
+	private void lblPrecedent_clic() {
+		precedent.play();
+		numPerso--;
+		if(numPerso == 0){
+			numPerso = NBPERSOS;
+		}
 			affichePerso();
-			numPerso++ ;
-		}
-		else {
-			numPerso = 1;
-		}
-
 	}
-	
-	private void lblSuivant_clic(){ 
-		
-			if ( numPerso <= NBPERSOS){
-				
-				affichePerso();
-				numPerso++ ;
-			}
-			else {numPerso =1 ;}
+
+	private void lblSuivant_clic() {
+		suivant.play();
+		if(numPerso == 3){
+			numPerso = 0;
+		}
+			numPerso++;
+			affichePerso();
+	}
 		/*for (numPerso=0 ; numPerso <= NBPERSOS ; numPerso++ ){
 			affichePerso();
 		}*/
 			
 			
 		
-	}
+	
 	
 	private void lblGo_clic(){ 
 		if (txtPseudo.getText().equals("")){
 			
 			JOptionPane.showMessageDialog(null, "Pseudo obligatoire");
 		} else {
-			
+			go.play();
 			controle.evenementVue(this,PSEUDO+SEPARE+txtPseudo.getText()+SEPARE+numPerso);
 			
 		}
@@ -184,6 +185,12 @@ public class ChoixJoueur extends JFrame implements Global{
 		numPerso = 1;
 		affichePerso();
 		this.controle =controle;
+		this.precedent = new Son (SONPRECEDENT) ;
+		this.suivant = new Son (SONSUIVANT) ;
+		this.go  =new Son (SONGO);
+		this.welcome = new Son (SONWELCOME) ;
+		this.welcome.play();
+		this.go =  new Son (SONGO);
 	}
 		
 }
