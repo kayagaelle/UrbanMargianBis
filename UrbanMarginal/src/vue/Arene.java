@@ -19,6 +19,7 @@ import controleur.Controle;
 import controleur.Global;
 
 import modele.Mur;
+import outils.son.Son;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -35,7 +36,7 @@ public class Arene extends JFrame implements Global {
 	private boolean client ; 
 	private Controle controle ;
 	private JTextArea txtChat;
-
+	private Son [] lessons = new Son[SON.length];
 
 	/**
 	 * Create the frame.
@@ -111,7 +112,27 @@ public class Arene extends JFrame implements Global {
 		
 		txtChat = new JTextArea();
 		jspChat.setViewportView(txtChat);
+		 
+		if (client){
+			(new Son (SONAMBIANCE)).playContinue();
+			for(int k=0;k<SON.length;k++){
+				lessons[k] = new Son(CHEMINSONS+SON[k]);
+			}
+		}
+		(new Son(SONAMBIANCE)).playContinue();
+
+		
+		
 	}
+	
+	public void JoueSon (Integer numSon){
+		lessons[numSon].play();
+		
+	}
+	
+	
+	
+	
 	
 	private void  contentPane_keyPressed(KeyEvent arg0) {
 		int valeur = -1;
