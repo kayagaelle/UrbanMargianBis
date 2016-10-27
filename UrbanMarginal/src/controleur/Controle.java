@@ -64,6 +64,7 @@ public class Controle implements Global {
 		}
 	if (ordre =="son"){
 		
+		
 		frmArene.JoueSon((Integer)info) ;
 	}	
 		

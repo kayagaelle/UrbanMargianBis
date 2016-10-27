@@ -88,14 +88,6 @@ public class ChoixJoueur extends JFrame implements Global{
 			
 		}
 		
-			
-			
-		
-		
-		
-		
-		
-		
 	}
 	/**
 	 * Create the frame.
