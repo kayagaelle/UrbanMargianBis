@@ -5,10 +5,10 @@ public interface Global {
 
 	  int PORT = 6666; 
 	String SEPARATOR = "/" ;
-	 String CHEMIN = "../media/" ;
+	 String CHEMIN = "media"+ SEPARATOR ;
 	String  CHEMINFONDS = CHEMIN+"fonds"+SEPARATOR;
 	String  FONDCHOIX = CHEMINFONDS + "fondchoix.jpg"	;
-	
+	String FONDCHOIXARENE = CHEMINFONDS + "fondchoixarene.jpg";
 	int GAUCHE = 0;     // direction
 	int DROITE = 1;     // direction 
 	int HAUT = 2; 
@@ -21,7 +21,8 @@ public interface Global {
 	String MORT ="mort";
 	int TIR = 4 ; 
 	int ACTION = 2 ; 
-	int NBPERSOS = 3;     //nb perosnnages
+	int NBPERSOS = 3; //nb perosnnages
+	int NBARENE = 4 ;
 	int H_PERSO = 44;    // taille hauteur personnage
 	int L_PERSO = 39 ;   // "" largeur ""
 	String SEPARE = "~";
@@ -31,10 +32,12 @@ public interface Global {
 	int H_CHAT = 200;
 	int H_SAISIE =25;
 	int MARGE =5;
-	String FONDARENE = CHEMINFONDS+"fondarene.jpg";
+	String FONDARENE = CHEMINFONDS+"fondarene";
+	String JPG = ".jpg";
 	int NBMURS = 20 ;
 	String CHEMINMURS = CHEMIN+"murs"+SEPARATOR;
 	String MUR = CHEMINMURS+"mur.gif"; // image du mur
+	String ARBRE = CHEMINMURS+"arbre.gif" ; // image du mur en forme d'arbre
 	int H_MUR = 35;
 	int L_MUR = 34 ;
 	int H_MESSAGE = 8;

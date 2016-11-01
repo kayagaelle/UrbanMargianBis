@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import controleur.Global;
+import vue.ChoixArene;
 
 public class Mur extends Objet implements Global{
 
@@ -22,8 +23,13 @@ public class Mur extends Objet implements Global{
 		super.label.getjLabel().setHorizontalAlignment(SwingConstants.CENTER);
 		super.label.getjLabel().setVerticalAlignment(SwingConstants.CENTER);
 		super.label.getjLabel().setBounds(posX, posY, L_MUR, H_MUR);
-		super.label.getjLabel().setIcon(new ImageIcon(MUR));
-		
+		if (ChoixArene.getNumArene() == 1 ){
+			super.label.getjLabel().setIcon(new ImageIcon(MUR));
+		}
+		if (ChoixArene.getNumArene() == 4 ){
+			super.label.getjLabel().setIcon(new ImageIcon(ARBRE));
+		}
+	
 		
 	}
 	

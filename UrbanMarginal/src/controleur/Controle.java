@@ -1,5 +1,6 @@
 package controleur;
 import vue.Arene;
+import vue.ChoixArene;
 import vue.ChoixJoueur;
 import vue.EntreeJeu;
  
@@ -26,6 +27,7 @@ public class Controle implements Global {
 	private Jeu leJeu ;
 	private Arene frmArene ;
 	private ChoixJoueur frmChoixJoueur ; 
+	private ChoixArene frmChoixArene ;
 	private Connection connection ;
 	
 	public static void main(String[] args) {
@@ -126,6 +128,9 @@ public class Controle implements Global {
 		if (uneFrame instanceof ChoixJoueur){
 			evenementChoixJoueur(info);
 		}
+		if (uneFrame instanceof ChoixArene){
+			evenementChoixArene(info);
+		}
 		if (uneFrame instanceof Arene){
 			evenementArene(info);
 			
@@ -135,6 +140,16 @@ public class Controle implements Global {
 	
 	private void  evenementArene(Object info){
 		((modele.JeuClient)this.leJeu).envoi(info);
+		
+		
+	}
+	private void  evenementChoixArene(Object info){
+		((modele.JeuServeur)this.leJeu).envoi(info);
+		frmArene = new Arene ("serveur",this);
+		((modele.JeuServeur)this.leJeu).constructionMurs ();
+		frmArene.setVisible(true);
+		frmChoixArene.dispose();
+		
 	}
 	
 	private void evenementChoixJoueur(Object info){
@@ -151,10 +166,9 @@ public class Controle implements Global {
 			new ServeurSocket (this , PORT);
 			leJeu = new JeuServeur (this);
 			frmEntreeJeu.dispose();
-			frmArene = new Arene ("serveur",this);
-			((modele.JeuServeur)this.leJeu).constructionMurs ();
+			frmChoixArene = new ChoixArene (this);
+			frmChoixArene.setVisible(true);
 		
-			frmArene.setVisible(true);
 			
 
 			
@@ -167,6 +181,8 @@ public class Controle implements Global {
 	        frmEntreeJeu.dispose();
 	        frmChoixJoueur = new ChoixJoueur(this);
 			frmChoixJoueur.setVisible(true);
+			
+			
 	     
 		}
 		

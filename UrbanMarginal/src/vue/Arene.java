@@ -87,7 +87,7 @@ public class Arene extends JFrame implements Global {
 		JLabel lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, L_ARENE, H_ARENE);
 		contentPane.add(lblFond);
-		lblFond.setIcon(new ImageIcon(FONDARENE));
+		lblFond.setIcon(new ImageIcon(FONDARENE+ChoixArene.getNumArene()+JPG));
 		
 		if (typeJeu=="client"){
 			

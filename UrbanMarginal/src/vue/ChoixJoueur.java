@@ -93,7 +93,7 @@ public class ChoixJoueur extends JFrame implements Global{
 	 * Create the frame.
 	 */
 	public ChoixJoueur(Controle controle) {
-		setTitle("Choice");
+		setTitle("Choix Joueur");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 416, 313);
 		contentPane = new JPanel();
