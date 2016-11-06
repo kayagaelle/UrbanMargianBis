@@ -17,7 +17,7 @@ public class JeuServeur extends Jeu implements Global{
 
 
 	private ArrayList<Mur> lesMurs = new ArrayList<Mur>() ;
-	
+
 	private Hashtable <Connection , Joueur> lesJoueurs = new Hashtable <Connection, Joueur>() ;
 	private ArrayList  <Joueur> lesJoueursDansLordre  = new ArrayList <Joueur> ();
 	private String laPhrase ; 
@@ -59,8 +59,8 @@ public class JeuServeur extends Jeu implements Global{
 
 		case PSEUDO : 
 			controle.evenementModele(this , "envoi panels Mur" , connection);
-			
-			
+
+
 			for (Joueur unJoueur : lesJoueursDansLordre) {
 				super.envoi(connection,unJoueur.getLabel() );
 				super.envoi(connection, unJoueur.getMessage());
@@ -82,7 +82,7 @@ public class JeuServeur extends Jeu implements Global{
 				lesJoueurs.get(connection).action(Integer.parseInt(infos[1]), lesJoueurs, lesMurs);
 			}
 			break ; 
-		
+
 		}
 
 
@@ -105,7 +105,7 @@ public class JeuServeur extends Jeu implements Global{
 		}
 	}
 
-	
+
 	//Constructeur
 	public JeuServeur (Controle controle){
 		super.controle = controle ;

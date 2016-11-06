@@ -83,7 +83,8 @@ public class Controle implements Global {
 		if (ordre =="envoi panels Mur"){
 			
 			((modele.JeuServeur)this.leJeu).envoi((Connection)info ,  frmArene.getJpnMurs());
-				((modele.JeuServeur)this.leJeu).envoi((Connection)info , frmArene.getLblFond());
+			
+				//((modele.JeuServeur)this.leJeu).envoi((Connection)info , frmArene.getLblFond());
 			//((Arene) frmArene).getLblFond().setIcon(new ImageIcon(FONDARENE+ChoixArene.getNumArene()+JPG));
 				
 			}
@@ -146,7 +147,7 @@ public class Controle implements Global {
 		((modele.JeuServeur)this.leJeu).constructionMurs ();
 		frmArene.setVisible(true);
 		frmChoixArene.dispose();
-		
+			
 	}
 	
 	private void evenementChoixJoueur(Object info){
