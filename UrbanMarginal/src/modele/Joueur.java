@@ -12,9 +12,9 @@ import controleur.Global;
 import outils.connexion.Connection;
 
 public class Joueur extends Objet implements Global {
-	
-	// propriété
-	
+
+	// propriétés
+
 	private String pseudo ;
 	private int numPerso ;
 	private Label message ;
@@ -27,8 +27,8 @@ public class Joueur extends Objet implements Global {
 	private static final int MAXVIE = 10;
 	private static final int GAIN = 1;
 	private static final int PERTE = 2;
-	
-		public int getOrientation() {
+
+	public int getOrientation() {
 		return orientation;
 	}
 	/**
@@ -37,18 +37,18 @@ public class Joueur extends Objet implements Global {
 	public String getPseudo() {
 		return pseudo;
 	}
-	
+
 	/**
 	 * @return the message
 	 */
 	public Label getMessage() {
 		return message;
 	}
-	
+
 
 	public Boule getBoule() {
-	return boule;
-}
+		return boule;
+	}
 
 	//constructeur
 	public Joueur(JeuServeur jeuServeur) {
@@ -57,7 +57,7 @@ public class Joueur extends Objet implements Global {
 		etape = 1;
 		orientation = DROITE ; 
 	}
-	
+
 	public void affiche(String etat , int etape){
 		label.getjLabel().setBounds(posX, posY, L_PERSO, H_PERSO);
 		label.getjLabel().setIcon(new ImageIcon(PERSO+numPerso+etat+etape+'d'+orientation+EXTIMAGE));
@@ -65,11 +65,11 @@ public class Joueur extends Objet implements Global {
 		message.getjLabel().setText(pseudo+" : "+vie);
 		this.jeuServeur.envoi(super.label);
 		this.jeuServeur.envoi(message);
-		 
-		
+
+
 	}
-	
-	
+
+
 	public void initPerso (String pseudo , int numPerso , Hashtable <Connection , Joueur >lesJoueurs  , ArrayList<Mur>lesMurs){
 		this.pseudo = pseudo;
 		this.numPerso = numPerso;
@@ -87,7 +87,7 @@ public class Joueur extends Objet implements Global {
 		affiche (MARCHE , etape);
 		boule = new Boule(jeuServeur);
 		jeuServeur.envoi(boule.getLabel());
-		
+
 	}
 
 	private boolean toucheJoueur(Hashtable <Connection , Joueur >lesJoueurs ){
@@ -95,36 +95,36 @@ public class Joueur extends Objet implements Global {
 		for (Joueur unJoueur : lesJoueurs.values()){
 			if (!unJoueur.equals(this)){
 				if (super.toucheObjet(unJoueur)){
-				return true ;
-			}
-		}	
+					return true ;
+				}
+			}	
+		}
+		return false ;
 	}
-	return false ;
-	}
-	
+
 	private boolean toucheMur (ArrayList<Mur> lesMurs){
 		for (Mur unMur : lesMurs ){
 			if (super.toucheObjet(unMur)){
-			return true ;
-		    }
+				return true ;
+			}
 		}
-	
-	return false ;
+
+		return false ;
 	}	
 
 	private void premierePosition (Hashtable <Connection , Joueur >lesJoueurs, ArrayList<Mur> lesMurs ){
 		label.getjLabel().setBounds(0, 0, L_PERSO, H_PERSO);
-		
+
 		do {
 			posX =(int) Math.round( Math.random() *(L_ARENE-L_PERSO));
 			posY =(int) Math.round( Math.random()*(H_ARENE-H_PERSO-H_MESSAGE));
-			
+
 		}while (toucheJoueur(lesJoueurs) || toucheMur(lesMurs));
-		
+
 	}
-	
+
 	public int deplace (int action , int position , int orientation , int lepas , int max ,Hashtable <Connection , Joueur >lesJoueurs, ArrayList<Mur> lesMurs ) {
-		
+
 		this.orientation = orientation ;
 		int ancpos = position ;
 		position += lepas ;
@@ -139,72 +139,73 @@ public class Joueur extends Objet implements Global {
 		}else {
 			posY = position ;
 		}
-		
+
 		if (toucheMur(lesMurs) || toucheJoueur(lesJoueurs)){
 			position = ancpos ;
-			
+
 		}
-		
+
 		etape = etape +1 ;
 		if(etape > NBETATSMARCHE){
 			etape = 1;
 		}
-		
+
 		return position;
-			
+
 	}
-	 public void  action (int action ,Hashtable <Connection , Joueur >lesJoueurs, ArrayList<Mur> lesMurs ){
-		 switch (action){
-		 case HAUT :
-			 posY = deplace (action, posY , orientation , -LEPAS , H_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
-			 break ; 
-		 case BAS  : 
-			 posY = deplace (action, posY , orientation , LEPAS , H_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
-			 break ;
-		 case GAUCHE :
-			 posX= deplace (action, posX ,GAUCHE , -LEPAS , L_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
-			 break ; 
-		 case DROITE  : 
-			 posX= deplace (action, posX , DROITE , LEPAS , L_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
-			 break ; 
-		 case TIR : 
-			 		jeuServeur.envoi(FIGHT);
-					boule.tireBoule(this, lesMurs, lesJoueurs);
-			
-		 }
-		 affiche (MARCHE, etape);
-		 
-		 
-		 
-	 }
-	 public void gainVie(){
-			vie += GAIN;
+	public void  action (int action ,Hashtable <Connection , Joueur >lesJoueurs, ArrayList<Mur> lesMurs ){
+		switch (action){
+		case HAUT :
+			posY = deplace (action, posY , orientation , -LEPAS , H_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			break ; 
+		case BAS  : 
+			posY = deplace (action, posY , orientation , LEPAS , H_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			break ;
+		case GAUCHE :
+			posX= deplace (action, posX ,GAUCHE , -LEPAS , L_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			break ; 
+		case DROITE  : 
+			posX= deplace (action, posX , DROITE , LEPAS , L_ARENE-(H_PERSO+H_MESSAGE) , lesJoueurs , lesMurs ); 
+			break ; 
+		case TIR : 
+			jeuServeur.envoi(FIGHT);
+			boule.tireBoule(this, lesMurs, lesJoueurs);
+
 		}
-		
-		public void perteVie(){
-			vie -= PERTE;
-			if(vie < 0){
-				vie = 0;
-			}
+		affiche (MARCHE, etape);
+
+
+
+	}
+	public void gainVie(){
+		vie += GAIN;
+	}
+
+	public void perteVie(){
+		vie -= PERTE;
+		if(vie < 0){
+			vie = 0;
 		}
-		
-		public boolean estMort(){
-			if(vie == 0){
-				return true;
-			}
-			return false;
+	}
+
+	public boolean estMort(){
+		if(vie == 0){
+			return true;
 		}
-		
-		public void departJoueur(){
-			if(this.label != null){
+		return false;
+	}
+
+	// Déconnection du joueur 
+	public void departJoueur(){
+		if(this.label != null){
 			this.message.getjLabel().setVisible(false);
 			super.label.getjLabel().setVisible(false);
 			this.boule.getLabel().getjLabel().setVisible(false);
 			jeuServeur.envoi(message);
 			jeuServeur.envoi(label);
 			jeuServeur.envoi(boule.getLabel());
-			}
 		}
-	
-	
+	}
+
+
 }

@@ -3,9 +3,9 @@ package controleur;
 public interface Global {
 
 
-	  int PORT = 6666; 
+	int PORT = 6666; 
 	String SEPARATOR = "/" ;
-	 String CHEMIN = "media"+ SEPARATOR ;
+	String CHEMIN = "media"+ SEPARATOR ;
 	String  CHEMINFONDS = CHEMIN+"fonds"+SEPARATOR;
 	String  FONDCHOIX = CHEMINFONDS + "fondchoix.jpg"	;
 	String FONDCHOIXARENE = CHEMINFONDS + "fondchoixarene.jpg";
@@ -13,12 +13,13 @@ public interface Global {
 	int DROITE = 1;     // direction 
 	int HAUT = 2; 
 	int BAS = 3; 
- 	String CHEMINPERSOS = CHEMIN+"personnages"+SEPARATOR; 
+	String CHEMINPERSOS = CHEMIN+"personnages"+SEPARATOR; 
 	String PERSO = CHEMINPERSOS +"perso";
 	String EXTIMAGE=".gif";
 	String MARCHE = "marche";
 	String BLESSE="touche";
 	String MORT ="mort";
+	int ARENE = 5;
 	int TIR = 4 ; 
 	int ACTION = 2 ; 
 	int NBPERSOS = 3; //nb perosnnages
@@ -38,6 +39,8 @@ public interface Global {
 	String CHEMINMURS = CHEMIN+"murs"+SEPARATOR;
 	String MUR = CHEMINMURS+"mur.gif"; // image du mur
 	String ARBRE = CHEMINMURS+"arbre.gif" ; // image du mur en forme d'arbre
+	String PYRAMIDE = CHEMINMURS+"pyramide.gif" ; // image du mur en forme de pyramide
+	String BON = CHEMINMURS+"bon.gif" ; // image du mur en forme de bonhomme de neige
 	int H_MUR = 35;
 	int L_MUR = 34 ;
 	int H_MESSAGE = 8;
@@ -52,17 +55,17 @@ public interface Global {
 	int NBETATSMORT = 2;
 	int FIGHT = 0;
 	int HURT = 1;
-    int DEATH = 2;
-    String CHEMINSONS = CHEMIN + "sons/";
-   String  SONPRECEDENT = CHEMINSONS + "precedent.wav"; // sur le clic du bouton précédent
-    String SONSUIVANT = CHEMINSONS + "suivant.wav"; // sur le clic du bouton suivant
-   String  SONGO = CHEMINSONS + "go.wav" ;// sur le clic du bouton go
-   String  SONWELCOME = CHEMINSONS + "welcome.wav"; // à l'entrée de la frame ChoixJoueur
-    String SONAMBIANCE = CHEMINSONS + "mabeaute.wav" ;// son d'ambiance dans tout
-    public static final String[]
-    		SON = {"fight.wav", "hurt.wav", "death.wav"} ;
+	int DEATH = 2;
+	String CHEMINSONS = CHEMIN + "sons/";
+	String  SONPRECEDENT = CHEMINSONS + "precedent.wav"; // sur le clic du bouton précédent
+	String SONSUIVANT = CHEMINSONS + "suivant.wav"; // sur le clic du bouton suivant
+	String  SONGO = CHEMINSONS + "go.wav" ;// sur le clic du bouton go
+	String  SONWELCOME = CHEMINSONS + "welcome.wav"; // à l'entrée de la frame ChoixJoueur
+	String SONAMBIANCE = CHEMINSONS + "mabeaute.wav" ;// son d'ambiance dans tout
+	public static final String[]
+			SON = {"fight.wav", "hurt.wav", "death.wav"} ;
 
-	
-	
-	
+
+
+
 }

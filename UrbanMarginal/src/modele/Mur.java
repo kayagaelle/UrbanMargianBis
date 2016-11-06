@@ -23,13 +23,21 @@ public class Mur extends Objet implements Global{
 		super.label.getjLabel().setHorizontalAlignment(SwingConstants.CENTER);
 		super.label.getjLabel().setVerticalAlignment(SwingConstants.CENTER);
 		super.label.getjLabel().setBounds(posX, posY, L_MUR, H_MUR);
+		
+		
 		if (ChoixArene.getNumArene() == 1 ){
 			super.label.getjLabel().setIcon(new ImageIcon(MUR));
+		}
+		if (ChoixArene.getNumArene() == 2 ){
+			super.label.getjLabel().setIcon(new ImageIcon(PYRAMIDE));
+		}
+		if (ChoixArene.getNumArene() == 3 ){
+			super.label.getjLabel().setIcon(new ImageIcon(BON));
 		}
 		if (ChoixArene.getNumArene() == 4 ){
 			super.label.getjLabel().setIcon(new ImageIcon(ARBRE));
 		}
-	
+		
 		
 	}
 	

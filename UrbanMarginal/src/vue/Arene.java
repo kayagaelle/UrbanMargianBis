@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import controleur.Controle;
 import controleur.Global;
+import vue.ChoixArene; 
 
 import modele.Mur;
 import outils.son.Son;
@@ -33,10 +34,12 @@ public class Arene extends JFrame implements Global {
 	private JTextField txtSaisie;
 	private JPanel jpnMurs ;
 	private JPanel jpnJeu ;
+	private JLabel lblFond ;
 	private boolean client ; 
 	private Controle controle ;
 	private JTextArea txtChat;
 	private Son [] lessons = new Son[SON.length];
+	
 
 	/**
 	 * Create the frame.
@@ -84,7 +87,7 @@ public class Arene extends JFrame implements Global {
 		jpnMurs.setOpaque(false);
 		
 		
-		JLabel lblFond = new JLabel("");
+		lblFond = new JLabel("");
 		lblFond.setBounds(0, 0, L_ARENE, H_ARENE);
 		contentPane.add(lblFond);
 		lblFond.setIcon(new ImageIcon(FONDARENE+ChoixArene.getNumArene()+JPG));
@@ -95,6 +98,7 @@ public class Arene extends JFrame implements Global {
 		txtSaisie.setBounds(0, H_ARENE, L_ARENE, H_SAISIE);
 		contentPane.add(txtSaisie);
 		txtSaisie.setColumns(10);
+		
 		
 			txtSaisie.addKeyListener(new KeyAdapter() {
 				@Override
@@ -125,6 +129,14 @@ public class Arene extends JFrame implements Global {
 		
 	}
 	
+	public JLabel getLblFond() {
+		return lblFond;
+	}
+
+	public void setLblFond(JLabel lblFond) {
+		this.lblFond = lblFond;
+	}
+
 	public void JoueSon (Integer numSon){
 		lessons[numSon].play();
 		
@@ -194,6 +206,8 @@ public class Arene extends JFrame implements Global {
 		jpnMurs.add(unPanel);
 		jpnMurs.repaint();
 		contentPane.requestFocus();
+		//lblFond.setIcon(new ImageIcon(FONDARENE+ChoixArene.getNumArene()+JPG));
+	
 	}
 
 	public void ajoutJoueur (JLabel unJoueur){
@@ -228,6 +242,7 @@ public class Arene extends JFrame implements Global {
 	public void remplaceChat (String remplace){
 		txtChat.setText(remplace);
 	}
+
 	
 	
 	

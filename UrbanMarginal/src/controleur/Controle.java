@@ -7,6 +7,7 @@ import vue.EntreeJeu;
 
 import java.util.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +37,7 @@ public class Controle implements Global {
 	}
 	// Constructeur 
 	public Controle (){
-		this.frmEntreeJeu = new EntreeJeu(this); // 
+		this.frmEntreeJeu = new EntreeJeu(this); 
 		frmEntreeJeu.setVisible(true);
 		
 	}
@@ -56,6 +57,8 @@ public class Controle implements Global {
 			
 			frmArene.ajoutPanelMurs((JPanel)info);
 		}
+		
+
 		if (ordre =="ajout joueur"){
 			
 			frmArene.ajoutModifJoueur(((Label)info).getNumLabel(), ((Label)info).getjLabel()); 
@@ -69,20 +72,20 @@ public class Controle implements Global {
 		
 		frmArene.JoueSon((Integer)info) ;
 	}	
-		
-		
-		
 	}
 	
 	private void evenementJeuServeur(String ordre, Object info) {
 		if (ordre =="ajout Mur"){
 			
 			frmArene.ajoutMur((JLabel)info);
+		
 		}
 		if (ordre =="envoi panels Mur"){
 			
 			((modele.JeuServeur)this.leJeu).envoi((Connection)info ,  frmArene.getJpnMurs());
-			
+				((modele.JeuServeur)this.leJeu).envoi((Connection)info , frmArene.getLblFond());
+			//((Arene) frmArene).getLblFond().setIcon(new ImageIcon(FONDARENE+ChoixArene.getNumArene()+JPG));
+				
 			}
 		if (ordre =="ajout joueur"){
 				
@@ -96,13 +99,7 @@ public class Controle implements Global {
 			((modele.JeuServeur)this.leJeu).envoi( frmArene.getTxtChat());
 			}
 	
-	
-	
-		
 	}
-	
-	
-	
 	
 	public void receptionInfo (Connection connection , Object info){
 		
@@ -155,12 +152,13 @@ public class Controle implements Global {
 	private void evenementChoixJoueur(Object info){
 		//System.out.println("envoi..."+info);
 		((modele.JeuClient)this.leJeu).envoi(info);
-		frmChoixJoueur.dispose();
+		frmChoixJoueur.dispose(); 
 		frmArene.setVisible(true);
+		
 	}
 	private void evenementEntreeJeu(Object info) {
 		
-		//System.out.println((String)info);
+		System.out.println((String)info);
 		if ((String)info == "serveur"){
 			
 			new ServeurSocket (this , PORT);
@@ -168,16 +166,13 @@ public class Controle implements Global {
 			frmEntreeJeu.dispose();
 			frmChoixArene = new ChoixArene (this);
 			frmChoixArene.setVisible(true);
-		
-			
-
 			
 		}else {
 			
 	     (new ClientSocket ((String)info , PORT , this)).isConnexionOk(); // ((String) info) : on a caster info en string
 	        leJeu = new JeuClient(this) ; 
 	        leJeu.setConnection(connection);
-	        frmArene = new Arene ("client",this);
+	       frmArene = new Arene ("client",this);
 	        frmEntreeJeu.dispose();
 	        frmChoixJoueur = new ChoixJoueur(this);
 			frmChoixJoueur.setVisible(true);
@@ -186,23 +181,5 @@ public class Controle implements Global {
 	     
 		}
 		
-		
-		
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
